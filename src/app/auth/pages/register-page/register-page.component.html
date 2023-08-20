@@ -1,0 +1,101 @@
+<h2>Validaciones Reactivas</h2>
+<hr>
+
+<div class="row">
+  <div class="col">
+
+    <form [formGroup]="myForm" (ngSubmit)="onSave()" autocomplete="off">
+
+      <!-- Nombre -->
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Nom</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="name" class="form-control" placeholder="Nom Usuari">
+
+          <span *ngIf="isValidField('name')" class="form-text text-danger">
+            Ha de ser en forma nom i cognoms
+          </span>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Email</label>
+        <div class="col-sm-9">
+          <input type="email" formControlName="email"  class="form-control" placeholder="Email Usuari">
+          <span *ngIf="isValidField('email')" class="form-text text-danger">
+            El correu no es vàlid o ja està en ús
+          </span>
+        </div>
+      </div>
+
+      <!-- Username -->
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Username</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="username" class="form-control" placeholder="Nom en codi Usuari">
+          <span *ngIf="isValidField('username')" class="form-text text-danger">
+            El username no pot ser Strider
+          </span>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Password</label>
+        <div class="col-sm-9">
+          <input type="password" formControlName="password" class="form-control" placeholder="Contrassenya del compte">
+
+          <span *ngIf="isValidField('password')" class="form-text text-danger">
+            La contrassenya ha de temir 6 caracteres.
+          </span>
+        </div>
+      </div>
+
+      <!-- Password2 -->
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Confirmar</label>
+        <div class="col-sm-9">
+          <input type="password" formControlName="password2" class="form-control" placeholder="Confirmar la contrassenya">
+
+          <span *ngIf="isValidField('password2')" class="form-text text-danger">
+            Las contrassenyes han de ser iguals
+          </span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-primary float-end" type="submit">
+            Crear
+          </button>
+        </div>
+      </div>
+
+
+    </form>
+  </div>
+</div>
+
+
+<h2>Form Valid: {{ myForm.valid }} </h2>
+<h2>Form Status: {{ myForm.status }} </h2>
+<h2>Form Pending: {{ myForm.pending }} </h2>
+<h2>Form errors</h2>
+<pre>{{ myForm.errors| json }}</pre>
+
+<h5>Nom</h5>
+<pre>{{ myForm.controls['name'].errors | json }}</pre>
+
+<h5>Correu</h5>
+<pre>{{  myForm.controls['email'].errors | json }}</pre>
+
+<h5>Username</h5>
+<pre>{{  myForm.controls['username'].errors | json }}</pre>
+
+
+<h5>Contrassenya</h5>
+<pre>{{  myForm.value.password | json }}</pre>
+
+<h5>Confirmar</h5>
+<pre>{{  myForm.controls['password2'].errors | json }}</pre>
